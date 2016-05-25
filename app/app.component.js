@@ -9,13 +9,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var hero_service_1 = require('./hero.service');
+var heroes_component_1 = require('./heroes.component');
+var hero_detail_component_1 = require('./hero-detail.component');
+var dashboard_component_1 = require('./dashboard.component');
+var router_deprecated_1 = require('@angular/router-deprecated');
 var AppComponent = (function () {
     function AppComponent() {
+        this.title = 'Tour of Black SuperHeroes';
     }
     AppComponent = __decorate([
+        router_deprecated_1.RouteConfig([
+            {
+                path: '/heroes',
+                name: 'Heroes',
+                component: heroes_component_1.HeroesComponent
+            },
+            {
+                path: '/dashboard',
+                name: 'Dashboard',
+                component: dashboard_component_1.DashboardComponent,
+                useAsDefault: true
+            },
+            {
+                path: '/detail/:id',
+                name: 'HeroDetail',
+                component: hero_detail_component_1.HeroDetailComponent
+            }
+        ]),
         core_1.Component({
             selector: 'my-app',
-            template: '<h1>My Second Angular 2 App</h1>'
+            styleUrls: ['app/app.component.css'],
+            template: "\n  <h1>{{title}}</h1>\n  <a [routerLink]=\"['Dashboard']\">Dashboard</a>\n  <a [routerLink]=\"['Heroes']\">Heroes</a>\n  <router-outlet></router-outlet>\n  ",
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES],
+            providers: [
+                router_deprecated_1.ROUTER_PROVIDERS,
+                hero_service_1.HeroService
+            ]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
